@@ -1,5 +1,5 @@
-public interface Payable {
+@FunctionalInterface public interface Payable {
     public void pay();
-    public boolean isPaid();
-    public double amount();
+//    public boolean isPaid();
+//    public double amount();
 }
