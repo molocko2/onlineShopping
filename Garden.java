@@ -1,8 +1,17 @@
-public class Garden extends Product{
-    public Garden(String title, float p){super(title, p);}
+import java.util.*;
 
+public class Garden extends Product {
     @Override
-    public int calcPrice() {
-        return 0;
+    float calcPrice(int quantity, float price) {
+        return quantity * price;
+    }
+
+    Garden() {
+        super();
+    }
+
+    public Garden(String t, double p) {
+        super(t, p);
+        Catalog.getInstance().add("Garden", this);
     }
 }

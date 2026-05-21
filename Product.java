@@ -1,38 +1,54 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
-public abstract class Product {
+public abstract class Product implements Printable {
+    protected final int id = Main.IDUtility.getID(this);
     private String title = "";
-    private float price = 0.0f;
-    protected int id = 0;
-    private HashMap<Product, ArrayList<Product>> category;
-    private void incId(){id++;}
-    public abstract int calcPrice();
+    private double price = 0.0f;
 
-    protected static int temp = 0;
-
-
-    public Product(){}
-    public Product(String t, float p){
-        title = t;
-        price = p;
-//        incId();
-        id = temp++;
-
-    }
-
+    abstract float calcPrice(int quantity, float price);
     public String getTitle() {
         return title;
     }
-
-    public float getPrice() {
+    public double getPrice() {
         return price;
-    }
-    public void print(){
-        System.out.printf("[%s] %f",this.getTitle(), this.getPrice());
     }
     public int getId() {
         return id;
     }
-}
+    public void setTitle(String s) {
+        title = s;
+    }
+    public void setPrice(float p) {
+        price = p;
+    }
 
+    public Product(String t, double p) {
+        title = t;
+        price = p;
+    }
+
+    @Override
+    public void print() {
+        System.out.printf("\"%s\": \n   ID: %d\n   Price: %f\n", title, id, price);
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, price);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) return false;
+        if ((other == null) || !(other instanceof Product)) return false;
+        Product pr = (Product)other;
+        return pr.id == id;
+    }
+
+    public Product() {}
+}
